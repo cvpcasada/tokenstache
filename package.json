@@ -1,5 +1,5 @@
 {
-  "name": "iter-stache",
+  "name": "tokenstache",
   "version": "1.0.0",
   "description": "tokenizes a string with mustache variables",
   "source": "tokenstache.js",
@@ -15,23 +15,32 @@
     "tokenizer"
   ],
   "scripts": {
-    "build": "rollup -c --environment FORMAT:umd && rollup -c --environment FORMAT:cjs && rollup -c --environment FORMAT:es",
-    "test": "jest",
-    "prepare": "npm run build",
-    "release": "npm run -s build && git commit -am $npm_package_version && git tag $npm_package_version && git push && git push --tags && npm publish"
+    "build": "npm-run-all --silent -s bundle size docs",
+    "bundle": "microbundle",
+    "size": "strip-json-comments --no-whitespace dist/tokenstache.js | bundlesize",
+    "docs": "documentation readme tokenstache.js -q --section API && npm run -s fixreadme",
+    "fixreadme": "node -e 'var fs=require(\"fs\");fs.writeFileSync(\"README.md\", fs.readFileSync(\"README.md\", \"utf8\").replace(/^-   /gm, \"- \"))'",
+    "test": "npm run build && jest",
+    "prepare": "npm t",
+    "release": "npm t && git commit -am $npm_package_version && git tag $npm_package_version && git push && git push --tags && npm publish"
   },
   "devDependencies": {
     "babel-jest": "^21.2.0",
     "babel-preset-env": "^1.6.1",
+    "bundlesize": "^0.15.3",
+    "documentation": "^5.3.5",
     "jest": "^21.2.1",
+    "microbundle": "^0.2.3",
+    "npm-run-all": "^4.1.2",
     "prettier": "^1.9.1",
-    "rollup": "^0.52.1",
-    "rollup-plugin-buble": "^0.18.0",
-    "rollup-plugin-es3": "^1.1.0",
-    "rollup-plugin-post-replace": "^1.0.0",
-    "rollup-plugin-uglify": "^2.0.1"
+    "strip-json-comments-cli": "^2.0.1"
   },
-  "dependencies": {},
+  "bundlesize": [
+    {
+      "path": "dist/tokenstache.js",
+      "maxSize": "400b"
+    }
+  ],
   "babel": {
     "presets": [
       [
