@@ -36,7 +36,7 @@ You can find the library on `window.tokenstache`.
 
 ```js
 import { tokenize } from 'tokenstache'
-let arr = tokenize(`hello {{user}}`, {user: `jim`});  // outputs: ['hello', jim]
+let arr = tokenize(`hello {{user}}`, {user: `jim`});  // outputs: [`hello `, `jim`]
 ```
 
 ### API
@@ -54,14 +54,14 @@ Tokenizes a string that contains handlebars and tries to resolve it
 **Parameters**
 
 - `template` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The template containing one or more {{variableNames}} every variable
-- `view` **([Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object) \| [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function))** An object or function that will resolve the values 
-       for every variable names that is used in the template. If it's omitted, it'll be set to 
+- `view` **([Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object) \| [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function))** An object or function that will resolve the values
+       for every variable names that is used in the template. If it's omitted, it'll be set to
        an empty object essentially removing all {{varName}}s in the template. (optional, default `{}`)
 
 **Examples**
 
 ```javascript
-let arr = tokenize(`hello {{user}}`, {user: `jim`});  // outputs: ['hello', jim]
+let arr = tokenize(`hello {{user}}`, {user: `jim`});  // outputs: [`hello `, `jim`]
 ```
 
 Returns **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)** Template where its variable names replaced with corresponding values.
