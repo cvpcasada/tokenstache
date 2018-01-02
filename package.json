@@ -1,6 +1,6 @@
 {
   "name": "tokenstache",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "tokenizes a string with mustache variables",
   "source": "tokenstache.js",
   "module": "dist/tokenstache.es.js",
